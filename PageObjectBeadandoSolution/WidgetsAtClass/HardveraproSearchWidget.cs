@@ -10,25 +10,25 @@ namespace PageObjectBeadandoSolution.WidgetsAtClass
 {
     public class HardveraproSearchWidget : BasePage
     {
-        public IWebElement SearchDetailsArrowDown => Driver.FindElement(By.ClassName("fa-chevron-down"));
+        public IWebElement SearchDetailsArrowDown => wait.Until(D => D.FindElement(By.ClassName("fa-chevron-down")));
         //A részletes kereséshez szükséges lenyító nyilacska
-        public IWebElement SearchForSpecificCounty => Driver.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűkítés megyére");
+        public IWebElement SearchForSpecificCounty => wait.Until(D => D.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűkítés megyére"));
         //A megyére való szűrés mezője
-        public IWebElement SearchBar => Driver.FindElements(By.ClassName("form-control")).First(element => element.GetAttribute("placeholder") == "Keresés");
+        public IWebElement SearchBar => wait.Until(D => D.FindElements(By.ClassName("form-control")).First(element => element.GetAttribute("placeholder") == "Keresés"));
         //A keresősáv
-        public IWebElement SearchForSpecificCity => Driver.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűkítés településre");
+        public IWebElement SearchForSpecificCity => wait.Until(D=>D.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűkítés településre"));
         //A városra való szűrés mezője
-        public IWebElement SearchForSpecificMarka => Driver.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűrés márkára");
+        public IWebElement SearchForSpecificMarka => wait.Until(D => D.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűrés márkára"));
         //A márkára való szűrés mezője
-        public IWebElement SearchForSpecificAdvertiser => Driver.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűrés hirdetőre");
+        public IWebElement SearchForSpecificAdvertiser => wait.Until(D => D.FindElements(By.ClassName("tt-input")).First(element => element.GetAttribute("placeholder") == "Szűrés hirdetőre"));
         //A hirdetőre való szűrés mezője
-        public IWebElement SendAsPackage => Driver.FindElement(By.ClassName("check-indicator"));
+        public IWebElement SendAsPackage => wait.Until(D => D.FindElement(By.ClassName("check-indicator")));
         //A csomagküldéssel is elérhető termékek checkbox-a
-        public IWebElement MinPrice => Driver.FindElement(By.Name("minprice"));
+        public IWebElement MinPrice => wait.Until(D => D.FindElement(By.Name("minprice")));
         //A minimális ár checkboxa
-        public IWebElement MaxPrice=> Driver.FindElement(By.Name("maxprice"));
+        public IWebElement MaxPrice=> wait.Until(D => D.FindElement(By.Name("maxprice")));
         //A maximális ár checkboxa
-        public IWebElement SearchButton => Driver.FindElement(By.ClassName("fa-search"));
+        public IWebElement SearchButton => wait.Until(D => D.FindElement(By.ClassName("fa-search")));
         //A keresőgomb
         public HardveraproSearchWidget(IWebDriver webDriver) : base(webDriver)
         {
@@ -38,7 +38,7 @@ namespace PageObjectBeadandoSolution.WidgetsAtClass
         public HardveraproSearchWidget SetSearchBar(string value)
         {
             SearchBar.SendKeys(value);
-            System.Threading.Thread.Sleep(2000);
+            //System.Threading.Thread.Sleep(2000);
             return new HardveraproSearchWidget(Driver);
         } //A metódus amellyel a keresőmezőbe írhatunk
 
@@ -55,6 +55,7 @@ namespace PageObjectBeadandoSolution.WidgetsAtClass
         } //A metódus amellyel beállíthatjuk a szűrendő települést
         public HardveraproCategorySearchWidget PushSearchButton()
         {
+            System.Threading.Thread.Sleep(500);
             SearchButton.Click();
             return new HardveraproCategorySearchWidget(Driver);
         }   //A metódus amellyel kereshetünk
